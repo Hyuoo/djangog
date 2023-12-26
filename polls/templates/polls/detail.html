@@ -1,0 +1,29 @@
+<!-- polls.detail.html -->
+<form action="{% url 'polls:vote' question.id %}" method="post">
+    {% csrf_token %}
+    <h1>{{question.question_text}}</h1>
+    {% if error_msg %}
+    <p><strong>
+        {{error_msg}}
+    </strong></p>
+    {% endif %}
+
+    {% for source in sources %}
+        <table>
+            <tr>
+                <td><img src={{source.url}}> </td><td>{{source.freq}}</td>
+            </tr>
+        </table>
+
+    {% endfor %}
+
+
+    {% for choice in question.choice_set.all %}
+    <label for="choice{{ forloop.counter }}">
+    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{choice.id}}"/>
+            {{choice.choice_text}}
+    </label>
+    <br>
+    {% endfor %}
+    <input type="submit" value="Vote">
+</form>

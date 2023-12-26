@@ -1,0 +1,8 @@
+<h2>회원가입</h2>
+
+<form method="post">
+    {% csrf_token %}
+    <!-- view에서 정의한 form클래스 -->
+    {{ form.as_p }}
+    <button type="submit">SIGN UP</button>
+</form>
